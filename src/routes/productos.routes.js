@@ -4,7 +4,8 @@ import { borrarProducto, crearProducto, editarProducto, obtenerListaProductos } 
 const router = Router();
 
 router.route("/productos").post(crearProducto).get(obtenerListaProductos);
-router.route("/productos/:id").get(obtenerListaProductos).delete(borrarProducto).put(editarProducto);
+router.route("/productos/:id").get(oobtenerProducto).delete(borrarProducto).put(editarProducto);
+
 
 
 export default router;

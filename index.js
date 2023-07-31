@@ -25,3 +25,4 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/apirestaurante', productosRouter);
 // app.use('/apirestaurante', usuariosRouter);
+app.use ('/apirestaurante/pedidos', pedidosRouter);

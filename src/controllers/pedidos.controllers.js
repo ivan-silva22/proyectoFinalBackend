@@ -72,3 +72,17 @@ export const consultaEntregarPedido = async (req, res) => {
        }); 
      } 
   };
+
+  export const listaPedidos = async (req, res) => {
+    try {
+      const listapedidos = await Pedido.find().populate({
+          path: "usuario", 
+        });
+      res.status(200).json(listapedidos);
+    } catch (error) {
+      console.log(error);
+      res.status(404).json({
+        mensaje: "Lo lamentamos, no se pudieron listar los pedidos",
+      });
+    }
+  };

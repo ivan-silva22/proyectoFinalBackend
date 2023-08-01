@@ -11,8 +11,9 @@ export const crearPedido = async (req, res) => {
  
     } catch (error) {
         res.status(404).json({
-            mensaje: 'Error al intentar crear los pedidos' 
+            mensaje: 'Error al intentar crear los pedidos'
+            
         })
-    
+        console.log(error) 
     }
 }

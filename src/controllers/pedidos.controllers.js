@@ -45,3 +45,30 @@ export const consultaEntregarPedido = async (req, res) => {
     }
   }
   
+  export const consultaPedidoPendiente = async (req, res) => {
+
+    const idPedido = req.params.id;
+    try {
+      const pedido = await Pedido.findById(idPedido);
+      if (!pedido) {
+        return res.status(404).json({ error: "Su pedido no se ha encontrado" });
+      }
+  
+      if (pedido.estado === "Pendiente") {
+        return res
+          .status(404)
+          .json({ error: "Su pedido esta pendiente." });
+      }
+  
+      pedido.estado = "Pendiente";
+      await pedido.save();
+      res.status(200).json({
+        mensaje: "Su pedido esta pendiente.",
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(404).json({
+        mensaje: 'Lo lamentamos, no se pudo entregar el pedido.',
+       }); 
+     } 
+  };

@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import path from 'path';
 import './src/database/dbConnection';
 import productosRouter from './src/routes/productos.routes';
-// import usuariosRouter from './src/routes/usuarios.routes';
+import usuariosRouter from './src/routes/usuarios.routes';
 
 dotenv.config();
 
@@ -24,5 +24,5 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/apirestaurante', productosRouter);
-// app.use('/apirestaurante', usuariosRouter);
-app.use ('/apirestaurante/pedidos', pedidosRouter);
+app.use('/apirestaurante', usuariosRouter);
+// app.use ('/apirestaurante/pedidos', pedidosRouter);

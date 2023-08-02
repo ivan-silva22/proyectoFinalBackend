@@ -12,7 +12,7 @@ dotenv.config();
 
 const app = express();
 
-app.set('PORT', process.env.PORT  || 4000);
+app.set(('PORT'), process.env.PORT  || 4000);
 
 app.listen(app.get('PORT')), ()=>{
     console.log('estoy en el puerto '+app.get('PORT'));
@@ -26,4 +26,4 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/apirestaurante', productosRouter);
 app.use('/apirestaurante', usuariosRouter);
-app.use ('/apirestaurante/pedidos', pedidosRouter);
+app.use ('/apirestaurante', pedidosRouter);

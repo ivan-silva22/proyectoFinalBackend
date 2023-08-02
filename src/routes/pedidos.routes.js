@@ -3,5 +3,5 @@ import { crearPedido } from "../controllers/pedidos.controllers";
 
 const router = Router();
 
-router.route("/").post(crearPedido)
+router.route("/pedidos").post(crearPedido);
 export default router;

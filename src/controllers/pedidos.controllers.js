@@ -86,3 +86,16 @@ export const consultaEntregarPedido = async (req, res) => {
       });
     }
   };
+
+  export const consultaPedido = async (req,res) => {
+    try{
+      const pedido = await Pedido.findById(req.params.id)
+      res.status(200).json(pedido);
+    }
+    catch (error){
+      console.log(error);
+      res.status(404).json({
+        mensaje:"No hay ningun registro"});
+      }
+    }
+  

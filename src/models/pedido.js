@@ -8,13 +8,24 @@ const pedidoSchema = new Schema({
     required: true,
   },
 
-  nombreProducto:{
-    type: String,
-    required:true,
-    unique: true,
-    minLength: 2,
-    maxLength: 100
-},
+  
+    productos: [
+      {
+        producto: { type: mongoose.Schema.Types.ObjectId, ref: 'producto' },
+        cantidad: {
+          type: Number,
+          required: true,
+          min: 1,
+          max: 10,
+        },
+        subtotalItem: {
+          type: Number,
+          required: true,
+          min: 1,
+          max: 100000,
+        },
+      },
+    ],
    
   estado: {
     type: String,

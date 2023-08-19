@@ -18,7 +18,7 @@ const pedidoSchema = new Schema({
           min: 1,
           max: 10,
         },
-        subtotalItem: {
+        subtotalProducto: {
           type: Number,
           required: true,
           min: 1,

@@ -3,9 +3,9 @@ import { consultaEntregarPedido, consultaPedidoPendiente, crearPedido, listaPedi
 
 const router = Router();
 
-router.route("/").post(crearPedido).get(listaPedidos)
-router.route("/entregado/:id").put(consultaEntregarPedido)
-router.route("/pendiente/:id").put(consultaPedidoPendiente)
-router.route("/:id").get(consultaPedido)
+router.route("/pedidos").post(crearPedido).get(listaPedidos)
+router.route("/pedidos/entregado/:id").put(consultaEntregarPedido)
+router.route("/pedidos/pendiente/:id").put(consultaPedidoPendiente)
+router.route("/pedidos/:id").get(consultaPedido)
 
 export default router;

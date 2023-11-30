@@ -6,6 +6,7 @@ const pedidoSchema = new Schema({
   fecha: {
     type: 'Date',
     required: true,
+    default: Date.now()
   },
 
   
@@ -30,12 +31,12 @@ const pedidoSchema = new Schema({
   estado: {
     type: String,
     required: true,
+    default: "Pendiente"
   },
   precioTotal: {
     type: Number,
     required: true,
-    min: 0,
-    max: 1000000
+    min: 0
   },
 });
 

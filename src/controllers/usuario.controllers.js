@@ -61,9 +61,10 @@ export const login = async (req, res) => {
         return res.status(404).json({mensaje: 'Correo o contraseña invalida - correo'});
     }
     //preguntar si la contraseña NO corresponde con el usuario encontrado
-    const passwordValido = bcrypt.compareSync(req.body.password, usuario.password);// devuelve true si los datos son iguales, caso contrario devuelve false
+    const passwordValido = bcrypt.compareSync(req.body.password, usuario.password);
+    // devuelve true si los datos son iguales, caso contrario devuelve false
     if(!passwordValido){
-        return res.status(400).json({mensaje: 'Correo o contraseña invalida - password'});
+        return res.status(404).json({mensaje: 'Correo o contraseña invalida - password'});
     }
     //responder al frontend que debe loguear al usuario
     res.status(200).json({

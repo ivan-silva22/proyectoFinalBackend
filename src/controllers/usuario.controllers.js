@@ -26,7 +26,7 @@ export const obtenerUsuario = async (req, res) => {
     });
   }
 };
-export const crearUsuario = async (req, res) => {
+export const crearUsuarioAdministrador = async (req, res) => {
   try {
     //verificar si el mail ya existe
     let usuario = await Usuario.findOne({ email: req.body.email });
@@ -52,25 +52,60 @@ export const crearUsuario = async (req, res) => {
   }
 };
 
+export const crearRegistroUsuarioNormal = async (req, res) => {
+  try {
+    //verificar si el mail ya existe
+    let usuario = await Usuario.findOne({ email: req.body.email });
+    if (usuario) {
+      return res
+        .status(400)
+        .json({ mensaje: "ya existe un usuario con el email enviado" });
+    }
+    // console.log(req.body);
+    const usuarioNormal = new Usuario(req.body);
+    //encriptar la contraseña
+    const salt = bcrypt.genSaltSync(10);
+    usuarioNormal.password = bcrypt.hashSync(req.body.password, salt);
+    usuarioNormal.estado = "activo";
+    usuarioNormal.rol = "normal";
+    await usuarioNormal.save();
+    res.status(201).json({
+      mensaje: "El usuario se creo correctamente",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: "Error al crear el usuario",
+    });
+  }
+};
+
 export const login = async (req, res) => {
   try {
     // buscar si existe el mail en nuestra collection de usuarios
-    let usuario = await Usuario.findOne({email: req.body.email});
+    let usuario = await Usuario.findOne({ email: req.body.email });
     //si el usuario No existe
-    if(!usuario){
-        return res.status(404).json({mensaje: 'Correo o contraseña invalida - correo'});
+    if (!usuario) {
+      return res
+        .status(404)
+        .json({ mensaje: "Correo o contraseña invalida - correo" });
     }
     //preguntar si la contraseña NO corresponde con el usuario encontrado
-    const passwordValido = bcrypt.compareSync(req.body.password, usuario.password);
+    const passwordValido = bcrypt.compareSync(
+      req.body.password,
+      usuario.password
+    );
     // devuelve true si los datos son iguales, caso contrario devuelve false
-    if(!passwordValido){
-        return res.status(404).json({mensaje: 'Correo o contraseña invalida - password'});
+    if (!passwordValido) {
+      return res
+        .status(404)
+        .json({ mensaje: "Correo o contraseña invalida - password" });
     }
     //responder al frontend que debe loguear al usuario
     res.status(200).json({
-        mensaje: 'El usuario es correcto',
-        nombreUsuario: usuario.nombreUsuario
-    })
+      mensaje: "El usuario es correcto",
+      nombreUsuario: usuario.nombreUsuario,
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({

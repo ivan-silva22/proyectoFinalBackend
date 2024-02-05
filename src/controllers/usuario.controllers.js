@@ -26,7 +26,7 @@ export const obtenerUsuario = async (req, res) => {
     });
   }
 };
-export const crearUsuario = async (req, res) => {
+export const crearUsuarioAdministrador = async (req, res) => {
   try {
     //verificar si el mail ya existe
     let usuario = await Usuario.findOne({ email: req.body.email });

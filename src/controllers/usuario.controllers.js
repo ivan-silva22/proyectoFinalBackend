@@ -113,3 +113,29 @@ export const login = async (req, res) => {
     });
   }
 };
+
+export const editarUsuario = async (req, res) => {
+  try {
+    const { nombreUsuario, email, estado, rol } =
+      req.body;
+    const usuario = await Usuario.findById(req.params.id);
+    if (!usuario) {
+      return res.status(404).json({
+        mensaje: "Error al buscar al usuario.",
+      });
+    }
+
+    usuario.nombreUsuario = nombreUsuario;
+    usuario.email = email;
+    usuario.estado = estado;
+    usuario.rol = rol;
+    await usuario.save();
+    res.status(200).json({
+      mensaje: "Usuario actualizado exitosamente.",
+    });
+  } catch (error) {
+    res.status(400).json({
+      mensaje: "No se pudo actualizar el usuario correctamente.",
+    });
+  }
+};
